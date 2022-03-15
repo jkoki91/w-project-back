@@ -1,0 +1,29 @@
+{
+  "name": "w-project-back",
+  "version": "1.0.0",
+  "description": "Final Jorge`s project",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jkoki91/w-project-back.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jkoki91/w-project-back/issues"
+  },
+  "homepage": "https://github.com/jkoki91/w-project-back#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
