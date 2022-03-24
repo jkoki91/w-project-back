@@ -1,4 +1,4 @@
-import { MongoClient } from 'mongodb';
+import { MongoClient, ObjectId } from 'mongodb';
 
 
 const URI = 'mongodb+srv://jkoki91:8rXYq9Xp4cQKTEv@w-cluster.t5ly7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
@@ -80,7 +80,8 @@ export const retrieveUserInfoByEmail = async (email) => {
         const db = client.db(DATABASE_NAME);
         const users = db.collection(COLLECTION_NAME);
         const query = { email };
-        const options = { projection: { _id: 0, password: 0, status: 0 } }
+        // const options = { projection: { _id: 0, password: 0, status: 0 } }
+        const options = { projection: { password: 0, status: 0 } }
         return await users.findOne(query, options);
     } catch (err) {
         console.error(err);
@@ -95,8 +96,8 @@ export const deleteUserByEmail = async (email) => {
         const db = client.db(DATABASE_NAME);
         const users = db.collection(COLLECTION_NAME);
         const query = { email };
-        const options = { projection: { _id: 0, password: 0, status: 0 } }
-        return await users.deleteOne(query, options);
+        // const options = { projection: { _id: 0, password: 0, status: 0 } }
+        return await users.deleteOne(query); //el segundo parametro es un callbacK entonces si pones segundo parametro ya no hace falta el await porque estas gestionando la asincronia con un callback
     } catch (err) {
         console.error(err);
     } finally {
@@ -104,16 +105,58 @@ export const deleteUserByEmail = async (email) => {
     }
 }
 
-export const updateInfoyEmail = async (email) => {
+
+export const updateEmail = async (id,email) => {
     try {
         await client.connect();
         const db = client.db(DATABASE_NAME);
         const users = db.collection(COLLECTION_NAME);
-        const query = { email };
-        const options = { projection: { _id: 0, password: 0, status: 0 } }
-        return await users.updateOne(query, options);
+        // const options = { projection: { _id: 0, password: 0, status: 0 } }
+        const userEmail = await users.updateOne({"_id":ObjectId(id)},{$set:email});
+        // return await users.updateOne({"_id":ObjectId(id)},{$set:email});;
+        return userEmail ?? undefined;
     } catch (err) {
-        console.error(err);
+        console.error('Retrieve users error: ', err);
+    } finally {
+        client.close();
+    }
+}
+
+export const updateName = async (id,name) => {
+    try {
+        await client.connect();
+        const db = client.db(DATABASE_NAME);
+        const users = db.collection(COLLECTION_NAME);
+        const userName = await users.updateOne({"_id":ObjectId(id)},{$set:name});
+        return userName ?? undefined;
+    } catch (err) {
+        console.error('Retrieve users error: ', err);
+    } finally {
+        client.close();
+    }
+}
+export const updateUserName = async (id,username) => {
+    try {
+        await client.connect();
+        const db = client.db(DATABASE_NAME);
+        const users = db.collection(COLLECTION_NAME);
+        const userUserName = await users.updateOne({"_id":ObjectId(id)},{$set:username});
+        return userUserName ?? undefined;
+    } catch (err) {
+        console.error('Retrieve users error: ', err);
+    } finally {
+        client.close();
+    }
+}
+export const updateAge = async (id,age) => {
+    try {
+        await client.connect();
+        const db = client.db(DATABASE_NAME);
+        const users = db.collection(COLLECTION_NAME);
+        const userAge = await users.updateOne({"_id":ObjectId(id)},{$set:age});
+        return userAge ?? undefined;
+    } catch (err) {
+        console.error('Retrieve users error: ', err);
     } finally {
         client.close();
     }
