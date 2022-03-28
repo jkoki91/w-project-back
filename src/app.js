@@ -21,5 +21,6 @@ app.get('/ping', (_req, res) => res.send('Pong'));
 app.use('/auth', authRouter); // declaramos el router de autenticación
 app.use('/users', validateAuth, usersRouter);
 app.use('/static',express.static('public-static'))
+app.use('/users', usersRouterF);
 
 app.listen(port, () => console.log(`Servidor levantado en el puerto ${port}`));

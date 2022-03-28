@@ -5,9 +5,14 @@ const storageEngine = multer.diskStorage({
         cb(null, './public-static')
     },
     filename: function (req, file, cb) {
-        cb(null, file.fieldname + '-' + Date.now())//nombre de usuario
+        cb(null, file.originalname )//nombre de usuario
+        //file.fieldname +'.jpg'
+        // file.originalname 
+        // req.body
+        // console.log(req.body.fileTitle,'prueba')
     }
 })
 
 export const uploadMiddleware = multer({ storage:storageEngine });
 
+ 
