@@ -1,3 +1,4 @@
+import {} from "dotenv/config";
 import express from 'express';
 import cors from 'cors';
 import authRouter from './auth/auth.router.js';
@@ -9,13 +10,16 @@ import path from 'path'
 import multer from 'multer'
 import postRouter from './posts/posts.router.js';
 
-dotenv.config()
+
+
+// dotenv.config()
 
 const app = express();
-const port = 4000;
+// const port = 4000;
+const port = process.env.PORT || 4000;
 
 app.use(cors());
-app.use(express.json());
+app.use(express.json()); 
 app.use(express.urlencoded ({extended: true}));
 
 app.get('/ping', (_req, res) => res.send('Pong'));

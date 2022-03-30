@@ -2,11 +2,11 @@ import { createUser, getUserByEmailNoStatus, retrieveSuccessUserByEmailAndPasswo
 import { createValidationToken, retrieveValidationToken, deleteValidationToken } from './auth.model.js';
 import { generateValidationToken, encodePassword } from './auth.utils.js';
 import { sendValidationEmail } from '../adapters/email.js';
-import { jwt_secret } from './auth.secrets.js';
+// import { jwt_secret } from './auth.secrets.js';
 // importo la librería JWT para generar un token JWT
 import jwt from 'jsonwebtoken';
 import { createPost } from '../posts/posts.model.js';
-
+const {JWT_SECRET} = process.env;
 
 /**
  * 1. Van a venir los datos de registro en el body. Habrá que validar el body
@@ -70,7 +70,8 @@ export const loginCtrl = async (req, res) => {
     const user = await retrieveSuccessUserByEmailAndPassword(email, encodePassword(password));
     if (user !== null) {
         // existe el usuario con esas condiciones
-        const token = jwt.sign({ email: user.email, hola:'bootcamp' }, jwt_secret); // paso 2
+        const token = jwt.sign({ email: user.email, hola:'bootcamp' }, JWT_SECRET);
+        // const token = jwt.sign({ email: user.email, hola:'bootcamp' }, jwt_secret); // paso 2
         res.status(201).json({ access_token: token }); // paso 3
     } else {
         res.sendStatus(404);
