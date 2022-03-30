@@ -5,6 +5,7 @@ import { sendValidationEmail } from '../adapters/email.js';
 import { jwt_secret } from './auth.secrets.js';
 // importo la librería JWT para generar un token JWT
 import jwt from 'jsonwebtoken';
+import { createPost } from '../posts/posts.model.js';
 
 
 /**
@@ -22,6 +23,7 @@ export const registerCtrl = async (req, res) => {
             // paso 3
             const token = generateValidationToken();
             await createValidationToken(token, req.body.email);
+            await createPost(req.body.email)//creo en al usuario en la bdd de posts
             // paso 4
             //ojo que el host es el de nuestra aplicación de react
             sendValidationEmail(req.body.email, `http://localhost:3000/validate?token=${token}`)

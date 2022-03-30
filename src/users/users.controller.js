@@ -1,7 +1,7 @@
 import express from 'express';
 import { retrieveUserInfoByEmail, retrieveUsersByName } from './users.model.js';
 import { deleteUserByEmail } from './users.model.js';
-import { updateImg, updateName, updateUserName, updateAge, updateFollow, updateFollowers } from './users.model.js';
+import { updateImg, updateName, updateUserName, updateAge, updateFollow, updateFollowers, updatePost } from './users.model.js';
 import fs from 'fs'
 
 export const getUserInfo = async (req, res) => {
@@ -82,6 +82,15 @@ export const updateFollowersCtrl = async (req,res)=>{
         followers:req.body.data
     }
     const user = await updateFollowers(id,userNew);
+    res.json(user)
+}
+
+export const patchPostsCtrl = async (req,res)=>{
+    const {id}=req.params
+    const userNew ={
+        posts:req.body.data
+    }
+    const user = await updatePost(id,userNew);
     res.json(user)
 }
 

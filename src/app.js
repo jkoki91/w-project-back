@@ -7,6 +7,7 @@ import dotenv from 'dotenv'
 // import bodyParser from 'body-parser'
 import path from 'path'
 import multer from 'multer'
+import postRouter from './posts/posts.router.js';
 
 dotenv.config()
 
@@ -21,6 +22,7 @@ app.get('/ping', (_req, res) => res.send('Pong'));
 app.use('/auth', authRouter); // declaramos el router de autenticación
 app.use('/users', validateAuth, usersRouter);
 app.use('/static',express.static('public-static'))
-app.use('/users', usersRouterF);
+app.use('/post', postRouter)
+// app.use('/users', usersRouterF);
 
 app.listen(port, () => console.log(`Servidor levantado en el puerto ${port}`));

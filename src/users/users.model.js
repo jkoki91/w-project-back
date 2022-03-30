@@ -209,3 +209,18 @@ export const updateFollowers = async (id,followers) => {
         client.close();
     }
 }
+
+export const updatePost = async (id,posts) => {
+    try {
+        await client.connect();
+        const db = client.db(DATABASE_NAME);
+        const users = db.collection(COLLECTION_NAME);
+        console.log(posts)
+        const userPosts = await users.updateOne({"_id":ObjectId(id)},{$set:posts});
+        return userPosts ?? undefined;
+    } catch (err) {
+        console.error('Retrieve users error: ', err);
+    } finally {
+        client.close();
+    }
+}
