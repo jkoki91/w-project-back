@@ -1,10 +1,9 @@
-import {} from "dotenv/config";
+import dotenv from 'dotenv'
 import express from 'express';
 import cors from 'cors';
 import authRouter from './auth/auth.router.js';
 import usersRouter from './users/users.router.js';
 import { validateAuth } from './auth/auth.middleware.js';
-import dotenv from 'dotenv'
 // import bodyParser from 'body-parser'
 import path from 'path'
 import multer from 'multer'
@@ -12,7 +11,7 @@ import postRouter from './posts/posts.router.js';
 
 
 
-// dotenv.config()
+dotenv.config()
 
 const app = express();
 // const port = 4000;
