@@ -69,7 +69,7 @@ export const retrieveSuccessUserByEmailAndPassword = async (email, password) => 
         }
         return await users.findOne(query);
     } catch (err) {
-        console.error(err);
+        console.log(err);
     } finally {
         client.close();
     }
