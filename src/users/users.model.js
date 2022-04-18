@@ -1,9 +1,9 @@
 import { MongoClient, ObjectId } from 'mongodb';
 
 // const {DB_PW} = process.env;
-console.log(process.env.DB_PW)
-const URI = `mongodb+srv://jkoki91:${process.env.DB_PW}@w-cluster.t5ly7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
-// const URI = 'mongodb+srv://jkoki91:8rXYq9Xp4cQKTEv@w-cluster.t5ly7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+console.log('La clave de mongo es:',process.env.DB_PW)
+// const URI = `mongodb+srv://jkoki91:${process.env.DB_PW}@w-cluster.t5ly7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+const URI = 'mongodb+srv://jkoki91:8rXYq9Xp4cQKTEv@w-cluster.t5ly7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 const client = new MongoClient(URI);
 const DATABASE_NAME = 'w-dataBase';
 const COLLECTION_NAME = 'users';
@@ -222,6 +222,27 @@ export const updatePost = async (id,posts) => {
         return userPosts ?? undefined;
     } catch (err) {
         console.error('Retrieve users error: ', err);
+    } finally {
+        client.close();
+    }
+}
+
+
+export const retrieveFollowedUsers = async (id) => {
+    try {
+        await client.connect();
+        const db = client.db(DATABASE_NAME);
+        const users = db.collection(COLLECTION_NAME);
+        const query = { "_id":ObjectId(id) };
+        const options = {
+            projection: { password: 0, status: 0 }
+        };
+        const usersList = await users.find(query, options).toArray()
+        // const usersList = await users.find({}, options).toArray()
+        // console.log(usersList)
+        return usersList
+    } catch (err) {
+        console.error(err);
     } finally {
         client.close();
     }

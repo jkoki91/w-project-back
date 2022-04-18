@@ -1,6 +1,6 @@
 import express from 'express';
 import { retrieveUserInfoByEmail, retrieveUsersByName } from './users.model.js';
-import { deleteUserByEmail } from './users.model.js';
+import { deleteUserByEmail,retrieveFollowedUsers } from './users.model.js';
 import { updateImg, updateName, updateUserName, updateAge, updateFollow, updateFollowers, updatePost } from './users.model.js';
 import fs from 'fs'
 
@@ -9,11 +9,12 @@ export const getUserInfo = async (req, res) => {
     try {
         const user = await retrieveUserInfoByEmail(req.email);
         res.json(user); // deveulvo la info del usuario
+        // console.log(req)
     } catch (err) {
         console.error(err);
         res.sendStatus(500);
     }
-}
+} 
 
 export const getUsers = async (req, res) => {
     // llamo al usuario
@@ -108,4 +109,19 @@ export const updateImageCtrl = (req,res)=>{
     console.log(req.body)
     res.send('Enviado')
     
+}
+
+
+export const getUsersFollowed = async (req, res) => {
+    // llamo al usuario
+    try {
+        console.log(req.params)
+        const user = await retrieveFollowedUsers(req.params);
+        // console.log(req.params)
+        // console.log('Hola bpdy',req.body)
+        res.json(user); // deveulvo los usuarios con ese nombre
+    } catch (err) {
+        console.error(err);
+        res.sendStatus(500);
+    }
 }

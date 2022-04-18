@@ -3,12 +3,12 @@ import { getUserInfo } from './users.controller.js';
 import { removeUser } from './users.controller.js';
 import { uploadMiddleware } from '../midleware/midleware.multer.js';
 import { updateNameCtrl, updateUserNameCtrl, updateAgeCtrl } from './users.controller.js';
-import { updateImageCtrl, updateFollowCtrl, updateFollowersCtrl, patchPostsCtrl } from './users.controller.js';
+import { updateImageCtrl, updateFollowCtrl, updateFollowersCtrl, patchPostsCtrl, getUsersFollowed } from './users.controller.js';
 import { getUsers } from './users.controller.js';
 import { getPostsCtrl, updatePostsCtrl } from '../posts/posts.controller.js';
 
 const router = express.Router();
-
+  
 router.route('/')
     .get(getUserInfo)
 
@@ -17,6 +17,9 @@ router.route('/posts')
 
 router.route('/users/:id')
     .get(getUsers)
+
+router.route('/users/info/:id')
+    .get(getUsersFollowed)
 
 router.route('/crud')
     .delete(removeUser)

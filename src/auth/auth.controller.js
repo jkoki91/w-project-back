@@ -26,7 +26,7 @@ export const registerCtrl = async (req, res) => {
             await createPost(req.body.email)//creo en al usuario en la bdd de posts
             // paso 4
             //ojo que el host es el de nuestra aplicación de react
-            sendValidationEmail(req.body.email, `https://veryguaysite.netlify.app/validate?token=${token}`)
+            sendValidationEmail(req.body.email, `http://localhost:3000/validate?token=${token}`)
             res.sendStatus(201);
         } else {
             // mando un 409(conflict) porque ya existe el usuario en BBDD
@@ -68,7 +68,6 @@ export const loginCtrl = async (req, res) => {
     const { email, password } = req.body;
     // paso 1
     const user = await retrieveSuccessUserByEmailAndPassword(email, encodePassword(password));
-    console.log(user.email)
     if (user !== null) {
         // existe el usuario con esas condiciones
         // const token = jwt.sign({ email: user.email, hola:'bootcamp' }, JWT_SECRET);
