@@ -13,7 +13,8 @@ export const createPost = async (posts) => {
         const db = client.db(DATABASE_NAME);
         const post = db.collection(COLLECTION_NAME);
         const userPosts = {
-            email:posts,
+            email:posts.email,
+            name:posts.name,
             posts:[]
         }
         return await post.insertOne(userPosts);
