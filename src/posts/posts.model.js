@@ -1,8 +1,8 @@
 import { MongoClient, ObjectId } from 'mongodb';
 
 // const {DB_PW} = process.env;
-// const URI = `mongodb+srv://jkoki91:${process.env.DB_PW}@w-cluster.t5ly7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
-const URI = 'mongodb+srv://jkoki91:8rXYq9Xp4cQKTEv@w-cluster.t5ly7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+const URI = `mongodb+srv://jkoki91:${process.env.DB_PW}@w-cluster.t5ly7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+// const URI = 'mongodb+srv://jkoki91:8rXYq9Xp4cQKTEv@w-cluster.t5ly7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 const client = new MongoClient(URI);
 const DATABASE_NAME = 'w-dataBase';
 const COLLECTION_NAME = 'posts';
@@ -13,7 +13,8 @@ export const createPost = async (posts) => {
         const db = client.db(DATABASE_NAME);
         const post = db.collection(COLLECTION_NAME);
         const userPosts = {
-            email:posts,
+            email:posts.email,
+            name:posts.name,
             posts:[]
         }
         return await post.insertOne(userPosts);

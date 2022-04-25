@@ -23,7 +23,7 @@ export const registerCtrl = async (req, res) => {
             // paso 3
             const token = generateValidationToken();
             await createValidationToken(token, req.body.email);
-            await createPost(req.body.email)//creo en al usuario en la bdd de posts
+            await createPost(req.body)//creo en al usuario en la bdd de posts
             // paso 4
             //ojo que el host es el de nuestra aplicación de react
             sendValidationEmail(req.body.email, `http://localhost:3000/validate?token=${token}`)
