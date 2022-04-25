@@ -1,9 +1,9 @@
 import { MongoClient, ObjectId } from 'mongodb';
 
 // const {DB_PW} = process.env;
-console.log('La clave de mongo es:',process.env.DB_PW)
-// const URI = `mongodb+srv://jkoki91:${process.env.DB_PW}@w-cluster.t5ly7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
-const URI = 'mongodb+srv://jkoki91:8rXYq9Xp4cQKTEv@w-cluster.t5ly7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+// console.log('La clave de mongo es:',process.env.DB_PW)
+const URI = `mongodb+srv://jkoki91:${process.env.DB_PW}@w-cluster.t5ly7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+// const URI = 'mongodb+srv://jkoki91:8rXYq9Xp4cQKTEv@w-cluster.t5ly7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 const client = new MongoClient(URI);
 const DATABASE_NAME = 'w-dataBase';
 const COLLECTION_NAME = 'users';

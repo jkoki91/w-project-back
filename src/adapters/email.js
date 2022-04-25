@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer';
 
-
+// console.log('prueba',process.env.REACT_APP_EMAIL)
 
 export const sendValidationEmail = async (to, url) => {
     // Only needed if you don't have a real mail account for testing
@@ -13,7 +13,7 @@ export const sendValidationEmail = async (to, url) => {
     service: 'gmail',
     auth: {
       user: process.env.REACT_APP_EMAIL, // generated ethereal user
-      pass: process.env.REACT_APP_EMAIL_PASS, // generated ethereal password
+      pass: process.env.REACT_APP_EMAIL_PASS, // generated ethereal password 
     },
   });
 
