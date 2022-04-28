@@ -64,8 +64,8 @@ export const retrieveSuccessUserByEmailAndPassword = async (email, password) => 
         const users = db.collection(COLLECTION_NAME);
         const query = {
             email,
-            password,
-            status: 'SUCCESS'
+            password
+            // status: 'SUCCESS'
         }
         return await users.findOne(query);
     } catch (err) {
