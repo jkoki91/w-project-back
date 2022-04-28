@@ -20,7 +20,7 @@ export const sendValidationEmail = async (to, url) => {
   // send mail with defined transport object
   const info = await transporter.sendMail({
     from: '"Neoland Bootcamp 👻" <neoland@faceb00k.com>', // sender address
-    to, // list of receivers
+    to:to, // list of receivers
     subject: "Valida tu email ✔", // Subject line
     html: `
        
